@@ -30,7 +30,8 @@ import com.zxiu.angelsjob.util.MyVolley;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.zxiu.angelsjob.R.id.displayName;
+import static com.zxiu.angelsjob.R.id.display_name;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity
 
     @BindView(R.id.nav_view)
     NavigationView navigationView;
-
+    View contentMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 final FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    TextView displayName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.displayName);
+                    TextView displayName = (TextView) navigationView.getHeaderView(0).findViewById(display_name);
                     displayName.setText(user.getDisplayName());
                     TextView email = (TextView) navigationView.getHeaderView(0).findViewById(R.id.email);
                     email.setText(user.getEmail());
@@ -87,44 +88,27 @@ public class MainActivity extends AppCompatActivity
                 } else {
                     Toast.makeText(MainActivity.this, "FirebaseAuth Not Signed in ", Toast.LENGTH_LONG).show();
                     startActivityForResult(
-                    // Get an instance of AuthUI based on the default app
-                    AuthUI.getInstance().createSignInIntentBuilder().setProviders(
-                            AuthUI.EMAIL_PROVIDER,
-                            AuthUI.GOOGLE_PROVIDER,
-                            AuthUI.FACEBOOK_PROVIDER).build(),
-                    RC_SIGN_IN);
+                            // Get an instance of AuthUI based on the default app
+                            AuthUI.getInstance().createSignInIntentBuilder().setProviders(
+                                    AuthUI.EMAIL_PROVIDER,
+                                    AuthUI.GOOGLE_PROVIDER,
+                                    AuthUI.FACEBOOK_PROVIDER).build(),
+                            RC_SIGN_IN);
                 }
 
             }
         };
 
-//        FirebaseAuth auth = FirebaseAuth.getInstance();
-//        Log.i("FirebaseAuth", "auth=" + auth.getCurrentUser());
-//        if (auth.getCurrentUser() != null) {
-//            Log.i("FirebaseAuth", "Providers=" + auth.getCurrentUser().getProviders());
-//            Toast.makeText(this, "FirebaseAuth Signed in " + auth.getCurrentUser().getDisplayName(), Toast.LENGTH_LONG).show();
-//
-//        } else {
-//            Toast.makeText(this, "FirebaseAuth Not Signed in", Toast.LENGTH_LONG).show();
-//            startActivityForResult(
-//                    // Get an instance of AuthUI based on the default app
-//                    AuthUI.getInstance().createSignInIntentBuilder().setProviders(
-//                            AuthUI.EMAIL_PROVIDER,
-//                            AuthUI.GOOGLE_PROVIDER,
-//                            AuthUI.FACEBOOK_PROVIDER).build(),
-//                    RC_SIGN_IN);
-//        }
-//        FirebaseMessaging.getInstance().subscribeToTopic("test");
-
         Log.i("FirebaseMessaging", "Token=" + FirebaseInstanceId.getInstance().getToken());
         FirebaseMessaging.getInstance().unsubscribeFromTopic("test");
+        contentMain = findViewById(R.id.content_main);
+//        PersonalInfoBinding personalInfoBinding =  DataBindingUtil.bind()
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-        Log.i(TAG, "displayName= " + displayName);
     }
 
     @Override
@@ -182,8 +166,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_personal_info) {
-
+        if (id == R.id.nav_curriculum_vitae) {
+            changeTo();
         } else if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
@@ -203,6 +187,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void changeTo(){
+        startActivity(new Intent(this, CurriculumVitaeActivity.class));
     }
 
 

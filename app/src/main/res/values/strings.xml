@@ -6,6 +6,6 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="personal_info">Personal Info</string>
+    <string name="curriculum_vitae">Curriculum Vitae</string>
     <string name="logout">Logout</string>
 </resources>

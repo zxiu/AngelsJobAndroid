@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "632211492503",
+    "firebase_url": "https://angels-job.firebaseio.com",
+    "project_id": "angels-job",
+    "storage_bucket": "angels-job.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:632211492503:android:3c221e010a3d6078",
+        "android_client_info": {
+          "package_name": "com.zxiu.angelsjob"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "632211492503-pra4guopo82crrc8096vmu12rctr2g9e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zxiu.angelsjob",
+            "certificate_hash": "5F236CB8379CAD53082E556FFB357CC067595481"
+          }
+        },
+        {
+          "client_id": "632211492503-58gvujpgpq35kbqaiikrmsteda5a4962.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9cG9cp3VgjkDUAf4vRsnvH-FZ_2H7rho"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "632211492503-58gvujpgpq35kbqaiikrmsteda5a4962.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

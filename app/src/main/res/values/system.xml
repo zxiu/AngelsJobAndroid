@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="facebook_application_id" translatable="false">307849882921048</string>
+    <string-array name="facebook_permissions">
+        <!-- Request permission to know the user's birthday -->
+        <item>user_birthday</item>
+
+    </string-array>
+</resources>

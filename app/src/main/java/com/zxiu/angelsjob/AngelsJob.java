@@ -7,6 +7,10 @@ import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -14,14 +18,16 @@ import java.security.NoSuchAlgorithmException;
  * Created by Xiu on 9/20/2016.
  */
 
-public class AngelsJobApp extends Application {
+public class AngelsJob extends Application {
+    public static DatabaseReference currentUserDatabaseRef;
 
     @Override
     public void onCreate() {
         super.onCreate();
-//        FacebookSdk.sdkInitialize(getApplicationContext());
-//        AppEventsLogger.activateApp(this);
         printKeyHash();
+        if (!FirebaseApp.getApps(this).isEmpty()){
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        }
     }
 
     private void printKeyHash() {

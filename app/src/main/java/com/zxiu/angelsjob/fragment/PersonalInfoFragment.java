@@ -1,29 +1,40 @@
 package com.zxiu.angelsjob.fragment;
 
-import android.databinding.DataBindingUtil;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
+import android.support.design.widget.TextInputEditText;
 
 import com.zxiu.angelsjob.R;
-import com.zxiu.angelsjob.bean.User;
-import com.zxiu.angelsjob.databinding.PersonalInfoBinding;
+
+import butterknife.BindView;
+import butterknife.OnTextChanged;
 
 /**
  * Created by Xiu on 9/21/2016.
  */
 
-public class PersonalInfoFragment extends Fragment {
-    User user = new User();
+public class PersonalInfoFragment extends AngelsJobFragment {
+    @BindView(R.id.first_name)
+    TextInputEditText firstName;
+    @BindView(R.id.last_name)
+    TextInputEditText lastName;
+    @BindView(R.id.birthday)
+    TextInputEditText birthday;
+    @BindView(R.id.email)
+    TextInputEditText email;
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        PersonalInfoBinding binding = DataBindingUtil.inflate(inflater, R.layout.personal_info, container, false);
-        View view = binding.getRoot();
-        return view;
+    public int getTitleId() {
+        return R.string.personal_info;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_personal_info;
+    }
+
+    @OnTextChanged({R.id.first_name, R.id.last_name, R.id.email})
+    public void save() {
+        saveUser();
     }
 }

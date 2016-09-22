@@ -7,5 +7,10 @@
     <string name="action_settings">Settings</string>
 
     <string name="curriculum_vitae">Curriculum Vitae</string>
+    <string name="personal_info">Personal Info</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="birthday">Birthday</string>
     <string name="logout">Logout</string>
 </resources>

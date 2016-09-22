@@ -22,8 +22,14 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.zxiu.angelsjob.AngelsJob;
 import com.zxiu.angelsjob.R;
 import com.zxiu.angelsjob.util.MyVolley;
 
@@ -35,15 +41,19 @@ import static com.zxiu.angelsjob.R.id.display_name;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-
     String TAG = "MainActivity";
     int RC_SIGN_IN = 10086;
 
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseUser mCurrentUser;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mUserDatabaseRef;
+    private ValueEventListener mValueEventListener;
+
+
     @BindView(R.id.nav_view)
     NavigationView navigationView;
-    View contentMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,25 +76,30 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        initAuth();
+        initDatabase();
+    }
+
+    protected void initAuth() {
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                final FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
+                mCurrentUser = firebaseAuth.getCurrentUser();
+                initDatabase();
+                if (mCurrentUser != null) {
                     TextView displayName = (TextView) navigationView.getHeaderView(0).findViewById(display_name);
-                    displayName.setText(user.getDisplayName());
+                    displayName.setText(mCurrentUser.getDisplayName());
                     TextView email = (TextView) navigationView.getHeaderView(0).findViewById(R.id.email);
-                    email.setText(user.getEmail());
+                    email.setText(mCurrentUser.getEmail());
                     NetworkImageView photo = (NetworkImageView) navigationView.getHeaderView(0).findViewById(R.id.photo);
-                    photo.setImageUrl(user.getPhotoUrl().toString(), MyVolley.getInstance(MainActivity.this).getImageLoader());
-                    Toast.makeText(MainActivity.this, "FirebaseAuth Signed in " + user.getDisplayName(), Toast.LENGTH_LONG).show();
+                    photo.setImageUrl(mCurrentUser.getPhotoUrl().toString(), MyVolley.getInstance(MainActivity.this).getImageLoader());
+                    Toast.makeText(MainActivity.this, "FirebaseAuth Signed in " + mCurrentUser.getDisplayName(), Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(MainActivity.this, "FirebaseAuth Not Signed in ", Toast.LENGTH_LONG).show();
                     startActivityForResult(
@@ -100,9 +115,30 @@ public class MainActivity extends AppCompatActivity
         };
 
         Log.i("FirebaseMessaging", "Token=" + FirebaseInstanceId.getInstance().getToken());
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("test");
-        contentMain = findViewById(R.id.content_main);
-//        PersonalInfoBinding personalInfoBinding =  DataBindingUtil.bind()
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("fragment_personal_info");
+    }
+
+    public void initDatabase() {
+        if (mCurrentUser != null) {
+            mDatabase = FirebaseDatabase.getInstance();
+            mUserDatabaseRef = FirebaseDatabase.getInstance().getReference("users").child(mCurrentUser.getUid());
+            mValueEventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Log.i(TAG, "dataSnapshot is: " + dataSnapshot);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w(TAG, "Failed to read value.", databaseError.toException());
+                }
+            };
+            mUserDatabaseRef.addValueEventListener(mValueEventListener);
+        } else {
+            mDatabase = null;
+            mUserDatabaseRef = null;
+        }
+        AngelsJob.currentUserDatabaseRef = mUserDatabaseRef;
     }
 
     @Override
@@ -116,6 +152,9 @@ public class MainActivity extends AppCompatActivity
         super.onStop();
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
+        }
+        if (mUserDatabaseRef != null && mValueEventListener != null) {
+            mUserDatabaseRef.removeEventListener(mValueEventListener);
         }
     }
 
@@ -189,7 +228,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void changeTo(){
+    private void changeTo() {
         startActivity(new Intent(this, CurriculumVitaeActivity.class));
     }
 

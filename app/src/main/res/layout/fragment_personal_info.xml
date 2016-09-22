@@ -6,6 +6,7 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <data>
+
         <variable
             name="user"
             type="com.zxiu.angelsjob.bean.User" />
@@ -68,5 +69,11 @@
                 android:text="@={user.curriculumVitae.personalInfo.email}" />
         </android.support.design.widget.TextInputLayout>
 
+        <include
+            android:id="@+id/layout_address"
+            layout="@layout/layout_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
+
 </layout>

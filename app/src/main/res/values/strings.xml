@@ -15,4 +15,11 @@
     <string name="logout">Logout</string>
 
     <string name="working_experience">Working Experience</string>
+
+    <!--Address-->
+    <string name="street">Street</string>
+    <string name="house_no">No.</string>
+    <string name="postal_code">Postal Code</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
 </resources>

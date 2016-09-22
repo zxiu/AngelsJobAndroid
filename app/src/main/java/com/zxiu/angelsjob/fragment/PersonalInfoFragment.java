@@ -2,27 +2,25 @@ package com.zxiu.angelsjob.fragment;
 
 
 import android.databinding.DataBindingUtil;
-import android.support.design.widget.TextInputEditText;
 
 import com.zxiu.angelsjob.R;
 import com.zxiu.angelsjob.bean.User;
 import com.zxiu.angelsjob.databinding.FragmentPersonalInfoBinding;
-
-import butterknife.BindView;
+import com.zxiu.angelsjob.databinding.LayoutAddressBinding;
 
 /**
  * Created by Xiu on 9/21/2016.
  */
 
 public class PersonalInfoFragment extends AngelsJobFragment {
-    @BindView(R.id.first_name)
-    TextInputEditText firstName;
-    @BindView(R.id.last_name)
-    TextInputEditText lastName;
-    @BindView(R.id.birthday)
-    TextInputEditText birthday;
-    @BindView(R.id.email)
-    TextInputEditText email;
+//    @BindView(R.id.first_name)
+//    TextInputEditText firstName;
+//    @BindView(R.id.last_name)
+//    TextInputEditText lastName;
+//    @BindView(R.id.birthday)
+//    TextInputEditText birthday;
+//    @BindView(R.id.email)
+//    TextInputEditText email;
 
 
     @Override
@@ -39,5 +37,7 @@ public class PersonalInfoFragment extends AngelsJobFragment {
     protected void bindUser() {
         FragmentPersonalInfoBinding binding = DataBindingUtil.bind(view);
         binding.setUser(User.getCurrentUser());
+        LayoutAddressBinding addressBinding = DataBindingUtil.bind(view.findViewById(R.id.layout_address));
+        addressBinding.setAddress(User.getCurrentUser().curriculumVitae.personalInfo.address);
     }
 }

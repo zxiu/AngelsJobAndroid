@@ -2,6 +2,8 @@ package com.zxiu.angelsjob.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -17,8 +19,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zxiu.angelsjob.R;
+import com.zxiu.angelsjob.bean.User;
 import com.zxiu.angelsjob.fragment.AngelsJobFragment;
 import com.zxiu.angelsjob.fragment.PersonalInfoFragment;
+import com.zxiu.angelsjob.fragment.WorkingExperienceFragment;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -28,6 +32,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Xiu on 9/21/2016.
@@ -38,12 +43,13 @@ public class CurriculumVitaeActivity extends AppCompatActivity {
     ViewPager pager;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.fab_ok)
+    FloatingActionButton fab_ok;
 
     MyPagerAdapter myPagerAdapter;
     List<Class<AngelsJobFragment>> fragmentClasses = new ArrayList() {{
         add(PersonalInfoFragment.class);
-        add(PersonalInfoFragment.class);
-        add(PersonalInfoFragment.class);
+        add(WorkingExperienceFragment.class);
     }};
 
     @Override
@@ -53,13 +59,35 @@ public class CurriculumVitaeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_curriculum_vitae);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
-        pager.setOffscreenPageLimit(1);
+        pager.setOffscreenPageLimit(3);
         pager.setAdapter(myPagerAdapter);
 
+    }
+
+    @OnClick(R.id.fab_cancel)
+    protected void discard() {
+        Snackbar.make(fab_ok, "Discard?", Snackbar.LENGTH_LONG)
+                .setAction(android.R.string.ok, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }).show();
+    }
+    @OnClick(R.id.fab_ok)
+    protected void save() {
+        Snackbar.make(fab_ok, "Save?", Snackbar.LENGTH_LONG)
+                .setAction(android.R.string.ok, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        User.storeCurrentUser();
+                        finish();
+                    }
+                }).show();
     }
 
     @Override
@@ -168,5 +196,8 @@ public class CurriculumVitaeActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

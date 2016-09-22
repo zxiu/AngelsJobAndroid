@@ -13,4 +13,6 @@
     <string name="email">Email</string>
     <string name="birthday">Birthday</string>
     <string name="logout">Logout</string>
+
+    <string name="working_experience">Working Experience</string>
 </resources>

@@ -17,14 +17,23 @@ public class User {
         return user;
     }
 
+    public static void setCurrentUser(User user) {
+        User.user = user;
+    }
+
     private User() {
     }
 
-    public void save() {
-        if (AngelsJob.currentUserDatabaseRef!=null){
-            AngelsJob.currentUserDatabaseRef.setValue(this);
+    public static void storeCurrentUser() {
+        if (AngelsJob.currentUserDatabaseRef != null) {
+            AngelsJob.currentUserDatabaseRef.setValue(getCurrentUser());
         }
     }
 
+    public static void retrieveCurrentUser() {
+        if (AngelsJob.currentUserDatabaseRef != null) {
+
+        }
+    }
 
 }

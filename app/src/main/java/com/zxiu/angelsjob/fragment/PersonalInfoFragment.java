@@ -34,7 +34,7 @@ public class PersonalInfoFragment extends AngelsJobFragment {
     }
 
     @Override
-    protected void bindUser() {
+    protected void bindViewData() {
         FragmentPersonalInfoBinding binding = DataBindingUtil.bind(view);
         binding.setUser(User.getCurrentUser());
         LayoutAddressBinding addressBinding = DataBindingUtil.bind(view.findViewById(R.id.layout_address));

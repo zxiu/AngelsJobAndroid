@@ -207,8 +207,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_curriculum_vitae) {
-            changeTo();
+        if (id == R.id.nav_personal_info) {
+            changeTo(PersonalInfoActivity.class);
+        } else if (id == R.id.nav_curriculum_vitae) {
+            changeTo(CurriculumVitaeActivity.class);
         } else if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
@@ -230,8 +232,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void changeTo() {
-        startActivity(new Intent(this, CurriculumVitaeActivity.class));
+    private void changeTo(Class clazz) {
+        startActivity(new Intent(this, clazz));
     }
 
 

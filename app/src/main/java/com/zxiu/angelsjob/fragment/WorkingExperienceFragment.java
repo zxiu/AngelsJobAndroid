@@ -25,7 +25,7 @@ public class WorkingExperienceFragment extends AngelsJobFragment {
     }
 
     @Override
-    protected void bindUser() {
+    protected void bindViewData() {
         FragmentWorkingExperienceBinding binding = DataBindingUtil.bind(view);
         binding.setUser(User.getCurrentUser());
     }

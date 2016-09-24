@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:windowSoftInputMode="adjustResize"
             android:name=".activity.PersonalInfoActivity"
             android:label="@string/personal_info"
             android:theme="@style/AppTheme.NoActionBar" />

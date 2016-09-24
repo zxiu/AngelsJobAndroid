@@ -9,5 +9,5 @@ public class PersonalInfo {
     public String lastName;
     public String email;
     public String birthday;
-    public Address address;
+    public Address address = new Address();
 }

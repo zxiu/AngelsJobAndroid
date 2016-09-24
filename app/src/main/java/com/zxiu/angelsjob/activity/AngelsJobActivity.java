@@ -3,7 +3,6 @@ package com.zxiu.angelsjob.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.util.SparseArrayCompat;
@@ -26,7 +25,6 @@ import java.lang.reflect.InvocationTargetException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by Xiu on 9/24/2016.
@@ -128,28 +126,6 @@ public abstract class AngelsJobActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_save_cancel, menu);
         return true;
-    }
-
-    @OnClick(R.id.fab_cancel)
-    protected void cancel() {
-        Snackbar.make(fab_ok, "Discard?", Snackbar.LENGTH_LONG)
-                .setAction(android.R.string.ok, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                }).show();
-    }
-    @OnClick(R.id.fab_ok)
-    protected void save() {
-        Snackbar.make(fab_ok, "Save?", Snackbar.LENGTH_LONG)
-                .setAction(android.R.string.ok, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        User.storeCurrentUser();
-                        finish();
-                    }
-                }).show();
     }
 
     @Override

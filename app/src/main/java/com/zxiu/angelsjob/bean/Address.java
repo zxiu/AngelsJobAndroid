@@ -9,5 +9,6 @@ public class Address {
     public String houseNo;
     public String postalCode;
     public String city;
+    public String region;
     public String country;
 }

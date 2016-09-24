@@ -6,7 +6,6 @@ import android.databinding.DataBindingUtil;
 import com.zxiu.angelsjob.R;
 import com.zxiu.angelsjob.bean.User;
 import com.zxiu.angelsjob.databinding.FragmentPersonalInfoBinding;
-import com.zxiu.angelsjob.databinding.LayoutAddressBinding;
 
 /**
  * Created by Xiu on 9/21/2016.
@@ -37,7 +36,5 @@ public class PersonalInfoFragment extends AngelsJobFragment {
     protected void bindViewData() {
         FragmentPersonalInfoBinding binding = DataBindingUtil.bind(view);
         binding.setUser(User.getCurrentUser());
-        LayoutAddressBinding addressBinding = DataBindingUtil.bind(view.findViewById(R.id.layout_address));
-        addressBinding.setAddress(User.getCurrentUser().curriculumVitae.personalInfo.address);
     }
 }

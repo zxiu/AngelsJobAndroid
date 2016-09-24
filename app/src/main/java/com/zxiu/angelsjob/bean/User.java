@@ -9,6 +9,7 @@ import com.zxiu.angelsjob.AngelsJob;
 public class User {
     static User user;
     public CurriculumVitae curriculumVitae = new CurriculumVitae();
+    public PersonalInfo personalInfo = new PersonalInfo();
 
     public static User getCurrentUser() {
         if (user == null) {

@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
+        android:visibility="gone"
         app:srcCompat="@android:drawable/ic_menu_save" />
 
     <android.support.design.widget.FloatingActionButton
@@ -57,5 +58,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left|bottom"
         android:layout_margin="@dimen/fab_margin"
+        android:visibility="gone"
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 </android.support.design.widget.CoordinatorLayout>

@@ -29,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.zxiu.angelsjob.AngelsJob;
+import com.zxiu.angelsjob.AngelsJobApp;
 import com.zxiu.angelsjob.R;
 import com.zxiu.angelsjob.bean.User;
 import com.zxiu.angelsjob.util.MyVolley;
@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mCurrentUser;
-    private FirebaseDatabase mDatabase;
     private DatabaseReference mUserDatabaseRef;
     private ValueEventListener mValueEventListener;
 
@@ -111,7 +110,6 @@ public class MainActivity extends AppCompatActivity
                                     AuthUI.FACEBOOK_PROVIDER).build(),
                             RC_SIGN_IN);
                 }
-
             }
         };
 
@@ -121,7 +119,6 @@ public class MainActivity extends AppCompatActivity
 
     public void initDatabase() {
         if (mCurrentUser != null) {
-            mDatabase = FirebaseDatabase.getInstance();
             mUserDatabaseRef = FirebaseDatabase.getInstance().getReference("users").child(mCurrentUser.getUid());
             mValueEventListener = new ValueEventListener() {
                 @Override
@@ -137,10 +134,9 @@ public class MainActivity extends AppCompatActivity
             };
             mUserDatabaseRef.addValueEventListener(mValueEventListener);
         } else {
-            mDatabase = null;
             mUserDatabaseRef = null;
         }
-        AngelsJob.currentUserDatabaseRef = mUserDatabaseRef;
+        AngelsJobApp.currentUserDatabaseRef = mUserDatabaseRef;
     }
 
     @Override

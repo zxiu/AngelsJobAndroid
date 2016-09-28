@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by Xiu on 9/20/2016.
  */
 
-public class AngelsJob extends Application {
+public class AngelsJobApp extends Application {
     public static DatabaseReference currentUserDatabaseRef;
 
     @Override

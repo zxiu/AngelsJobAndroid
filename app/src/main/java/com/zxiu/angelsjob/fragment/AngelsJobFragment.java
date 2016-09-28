@@ -26,10 +26,10 @@ public abstract class AngelsJobFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this, view);
-        bindViewData();
+        onBindViewData();
         return view;
     }
 
-    protected abstract void bindViewData();
+    protected abstract void onBindViewData();
 
 }

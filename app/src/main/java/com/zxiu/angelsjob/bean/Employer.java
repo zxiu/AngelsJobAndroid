@@ -5,7 +5,6 @@ package com.zxiu.angelsjob.bean;
  */
 
 public class Employer {
-    public String name;
-    public Address address = new Address();
-
+    public String name = "test company";
+    public Location location = new Location();
 }

@@ -1,6 +1,6 @@
 package com.zxiu.angelsjob.bean;
 
-import com.zxiu.angelsjob.AngelsJob;
+import com.zxiu.angelsjob.AngelsJobApp;
 
 /**
  * Created by Xiu on 9/21/2016.
@@ -26,13 +26,13 @@ public class User {
     }
 
     public static void storeCurrentUser() {
-        if (AngelsJob.currentUserDatabaseRef != null) {
-            AngelsJob.currentUserDatabaseRef.setValue(getCurrentUser());
+        if (AngelsJobApp.currentUserDatabaseRef != null) {
+            AngelsJobApp.currentUserDatabaseRef.setValue(getCurrentUser());
         }
     }
 
     public static void retrieveCurrentUser() {
-        if (AngelsJob.currentUserDatabaseRef != null) {
+        if (AngelsJobApp.currentUserDatabaseRef != null) {
 
         }
     }

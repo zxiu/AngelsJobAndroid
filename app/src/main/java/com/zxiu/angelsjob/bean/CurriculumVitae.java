@@ -8,6 +8,13 @@ import java.util.List;
  */
 
 public class CurriculumVitae {
-    public List<WorkingExperience> workingExperiences = new ArrayList<>();
-    public List<Asset> assets=new ArrayList<>();
+    public static String NAME = "curriculumVitae";
+    public List<WorkingExperience> workingExperiences = new ArrayList() {
+        {
+            add(new WorkingExperience());
+            add(new WorkingExperience());
+            add(new WorkingExperience());
+        }
+    };
+    public List<Asset> assets = new ArrayList<>();
 }

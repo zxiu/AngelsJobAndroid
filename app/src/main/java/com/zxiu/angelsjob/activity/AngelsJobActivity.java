@@ -15,8 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.database.DatabaseReference;
 import com.zxiu.angelsjob.R;
-import com.zxiu.angelsjob.bean.User;
 import com.zxiu.angelsjob.fragment.AngelsJobFragment;
 
 import java.io.PrintWriter;
@@ -43,6 +43,7 @@ public abstract class AngelsJobActivity extends AppCompatActivity {
     PagerTitleStrip pagerTitleStrip;
 
     AngelsJobPagerAdapter mPagerAdapter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -131,7 +132,8 @@ public abstract class AngelsJobActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_save) {
-            User.storeCurrentUser();
+//            User.storeCurrentUser();
+            store();
             finish();
         } else if (item.getItemId() == R.id.menu_cancel) {
             finish();
@@ -140,4 +142,13 @@ public abstract class AngelsJobActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    protected void store() {
+        getDatabaseRef().setValue(getStoreObject());
+    }
+
+    protected abstract DatabaseReference getDatabaseRef();
+
+    protected abstract Object getStoreObject();
+
 }

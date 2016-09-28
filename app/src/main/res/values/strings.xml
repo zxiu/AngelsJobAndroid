@@ -23,4 +23,12 @@
     <string name="city">City</string>
     <string name="state_province_region">State/Province/Region</string>
     <string name="country">Country</string>
+
+    <!--Working Experience-->
+    <string name="begin">begin</string>
+    <string name="end">end</string>
+
+    <!--Employer-->
+    <string name="employer">Employer</string>
+
 </resources>

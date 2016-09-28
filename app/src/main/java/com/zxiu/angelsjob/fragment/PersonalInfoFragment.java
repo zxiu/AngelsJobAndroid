@@ -12,15 +12,6 @@ import com.zxiu.angelsjob.databinding.FragmentPersonalInfoBinding;
  */
 
 public class PersonalInfoFragment extends AngelsJobFragment {
-//    @BindView(R.id.first_name)
-//    TextInputEditText firstName;
-//    @BindView(R.id.last_name)
-//    TextInputEditText lastName;
-//    @BindView(R.id.birthday)
-//    TextInputEditText birthday;
-//    @BindView(R.id.email)
-//    TextInputEditText email;
-
 
     @Override
     public int getTitleId() {
@@ -33,7 +24,7 @@ public class PersonalInfoFragment extends AngelsJobFragment {
     }
 
     @Override
-    protected void bindViewData() {
+    protected void onBindViewData() {
         FragmentPersonalInfoBinding binding = DataBindingUtil.bind(view);
         binding.setUser(User.getCurrentUser());
     }

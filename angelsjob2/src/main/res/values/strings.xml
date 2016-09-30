@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Angelsjob2</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="curriculum_vitae">Curriculum vitae</string>
+    <string name="cover_letter">Cover letter</string>
+    <string name="opportunities">Opportunities</string>
+    <string name="applications">Applications</string>
+</resources>

@@ -2,6 +2,8 @@ package com.zxiu.angelsjob2.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +11,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,7 +34,7 @@ public class MainActivity extends BaseActivity {
         add(new MainMenuItem(R.string.curriculum_vitae, R.drawable.banner_cv, CurriculumVitaeActivity.class, Gravity.START));
         add(new MainMenuItem(R.string.cover_letter, R.drawable.banner_cl, CoverLetterActivity.class, Gravity.END));
         add(new MainMenuItem(R.string.opportunities, R.drawable.banner_job, CurriculumVitaeActivity.class, Gravity.START));
-        add(new MainMenuItem(R.string.my_applications, R.drawable.banner_successful, CoverLetterActivity.class, Gravity.END));
+        add(new MainMenuItem(R.string.applications, R.drawable.banner_successful, CoverLetterActivity.class, Gravity.END));
     }};
 
     @BindView(R.id.recycler)
@@ -80,6 +84,20 @@ public class MainActivity extends BaseActivity {
             holder.title.setGravity(getItem(position).gravity);
             holder.image.setImageResource(getItem(position).imageId);
             holder.itemView.setOnClickListener(getItem(position).onClickListener);
+            setAnimation(holder.itemView, position);
+        }
+
+        private int lastPosition = -1;
+
+        private void setAnimation(View viewToAnimate, int position) {
+            // If the bound view wasn't previously displayed on screen, it's animated
+            if (position > lastPosition) {
+                Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), position % 2 == 0 ? R.anim.slide_in_left : R.anim.slide_in_right);
+                viewToAnimate.setAnimation(animation);
+                viewToAnimate.animate().setStartDelay(5000);
+                //viewToAnimate.startAnimation(animation);
+                lastPosition = position;
+            }
         }
 
 
@@ -90,6 +108,49 @@ public class MainActivity extends BaseActivity {
         @Override
         public int getItemCount() {
             return mainMenuItemList.size();
+        }
+    }
+
+    public class MenuViewItemAnimator extends RecyclerView.ItemAnimator {
+
+        @Override
+        public boolean animateDisappearance(@NonNull RecyclerView.ViewHolder viewHolder, @NonNull ItemHolderInfo preLayoutInfo, @Nullable ItemHolderInfo postLayoutInfo) {
+            return false;
+        }
+
+        @Override
+        public boolean animateAppearance(@NonNull RecyclerView.ViewHolder viewHolder, @Nullable ItemHolderInfo preLayoutInfo, @NonNull ItemHolderInfo postLayoutInfo) {
+            return false;
+        }
+
+        @Override
+        public boolean animatePersistence(@NonNull RecyclerView.ViewHolder viewHolder, @NonNull ItemHolderInfo preLayoutInfo, @NonNull ItemHolderInfo postLayoutInfo) {
+            return false;
+        }
+
+        @Override
+        public boolean animateChange(@NonNull RecyclerView.ViewHolder oldHolder, @NonNull RecyclerView.ViewHolder newHolder, @NonNull ItemHolderInfo preLayoutInfo, @NonNull ItemHolderInfo postLayoutInfo) {
+            return false;
+        }
+
+        @Override
+        public void runPendingAnimations() {
+
+        }
+
+        @Override
+        public void endAnimation(RecyclerView.ViewHolder item) {
+
+        }
+
+        @Override
+        public void endAnimations() {
+
+        }
+
+        @Override
+        public boolean isRunning() {
+            return false;
         }
     }
 

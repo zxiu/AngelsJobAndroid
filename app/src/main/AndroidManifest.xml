@@ -4,14 +4,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name=".AngelsJobApp"
+        android:name="com.zxiu.angelsjob.AngelsJobApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.zxiu.angelsjob.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,22 +21,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.PersonalInfoActivity"
+            android:name="com.zxiu.angelsjob.activity.PersonalInfoActivity"
             android:label="@string/personal_info"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".activity.CurriculumVitaeActivity"
+            android:name="com.zxiu.angelsjob.activity.CurriculumVitaeActivity"
             android:label="@string/curriculum_vitae"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
 
-        <service android:name=".service.MyFirebaseMessagingService">
+        <service android:name="com.zxiu.angelsjob.service.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".service.MyFirebaseInstanceIDService">
+        <service android:name="com.zxiu.angelsjob.service.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

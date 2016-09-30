@@ -44,6 +44,11 @@ public class WorkingExperienceFragment extends AngelsJobFragment {
 
     }
 
+    @Override
+    protected int[] getDateInputViewIds() {
+        return new int[]{};
+    }
+
     class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

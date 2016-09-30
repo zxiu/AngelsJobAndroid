@@ -2,10 +2,14 @@ package com.zxiu.angelsjob.fragment;
 
 
 import android.databinding.DataBindingUtil;
+import android.support.design.widget.TextInputEditText;
+import android.view.View;
 
 import com.zxiu.angelsjob.R;
 import com.zxiu.angelsjob.bean.User;
 import com.zxiu.angelsjob.databinding.FragmentPersonalInfoBinding;
+
+import butterknife.BindView;
 
 /**
  * Created by Xiu on 9/21/2016.
@@ -25,7 +29,13 @@ public class PersonalInfoFragment extends AngelsJobFragment {
 
     @Override
     protected void onBindViewData() {
-        FragmentPersonalInfoBinding binding = DataBindingUtil.bind(view);
+        FragmentPersonalInfoBinding binding = DataBindingUtil.bind(getView());
         binding.setUser(User.getCurrentUser());
     }
+
+    @Override
+    protected int[] getDateInputViewIds() {
+        return new int[]{R.id.birthday};
+    }
+
 }
